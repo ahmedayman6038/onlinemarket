@@ -15,6 +15,7 @@ if ($result->num_rows > 0) {
     $rowData = $result->fetch_assoc(); 
 }
 $nameErr = $priceErr = $imgErr  = "";
+$name = $price = $desc = "";
 ?>
 <?php
    
@@ -67,9 +68,12 @@ if(isset($_POST["submit"])) {
             move_uploaded_file($_FILES["img"]["tmp_name"], $target_file);
             $image = $uniqe . "-" . basename($_FILES["img"]["name"]); 
         }
-        $sql2 = 'UPDATE `product` SET pname="'.$_POST["name"].'",categoryId='.$_POST['category'].
-        ',price='.$_POST['price'].',`img`="'
-        .$image.'",`desc`="'.$_POST['desc'].'" WHERE id='.$rowData["id"].'';
+        $name = test_input($_POST["name"]);
+        $desc = test_input($_POST["desc"]);
+        $price = test_input($_POST["price"]);
+        $sql2 = 'UPDATE `product` SET pname="'.$name.'",categoryId='.$_POST['category'].
+        ',price='.$price.',`img`="'
+        .$image.'",`desc`="'.$desc.'" WHERE id='.$rowData["id"].'';
         if ($conn->query($sql2) === TRUE) {
             $conn->close();
             header("Location: product.php" );

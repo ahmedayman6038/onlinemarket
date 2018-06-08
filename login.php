@@ -3,7 +3,9 @@ include("header.php");
 require("DatabaseConnection.php");
 $error = "";
 if(isset($_POST["submit"])){
-    $sql = "SELECT * FROM `user` WHERE email='".$_POST["email"]."' and password='".$_POST["password"]."'";
+    $email = test_input($_POST["email"]);
+    $password = test_input($_POST["password"]);
+    $sql = "SELECT * FROM `user` WHERE email='".$email."' and password='".$password."'";
     $result = $conn->query($sql);
     $rowData;
     if ($result->num_rows > 0) {

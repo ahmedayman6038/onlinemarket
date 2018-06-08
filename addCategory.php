@@ -8,6 +8,8 @@ if(!isset($_SESSION["userId"])){
     header("Location: login.php");
   }
 $nameErr = "";
+$name = $desc = "";
+
 ?>
 <?php
    
@@ -21,7 +23,9 @@ if(isset($_POST["submit"])) {
 
     // Check if $ok is set to 0 by an error
     if ($ok != 0) {
-        $sql = 'INSERT INTO `category`(`cname`, `desc`) VALUES ("'.$_POST["name"].'","'.$_POST['desc'].'")';
+        $name = test_input($_POST["name"]);
+        $desc = test_input($_POST['desc']);
+        $sql = 'INSERT INTO `category`(`cname`, `desc`) VALUES ("'.$name.'","'.$desc.'")';
         if ($conn->query($sql) === TRUE) {
             $conn->close();
             header("Location: category.php" );

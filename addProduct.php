@@ -8,6 +8,7 @@ if(!isset($_SESSION["userId"])){
     header("Location: login.php");
   }
 $nameErr = $priceErr = $imgErr  = "";
+$name = $price = $desc = ""; 
 ?>
 <?php
    
@@ -61,9 +62,12 @@ if(isset($_POST["submit"])) {
         }else{
             $filename = $image;
         }
+        $name = test_input($_POST["name"]);
+        $desc = test_input($_POST["desc"]);
+        $price = test_input($_POST["price"]);
         $sql = 'INSERT INTO `product`(`pname`, `categoryId`, `price`, `img`, `desc`) VALUES ("'.
-        $_POST["name"].'",'.
-        $_POST['category'].','.$_POST['price'].',"'.$filename.'","'.$_POST['desc'].'")';
+        $name.'",'.
+        $_POST['category'].','.$price.',"'.$filename.'","'.$desc.'")';
         
         if ($conn->query($sql) === TRUE) {
             $conn->close();

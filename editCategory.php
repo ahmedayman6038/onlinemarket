@@ -15,6 +15,7 @@ if ($result->num_rows > 0) {
     $rowData = $result->fetch_assoc(); 
 }
 $nameErr = "";
+$name = $desc = "";
 ?>
 <?php
    
@@ -28,7 +29,9 @@ if(isset($_POST["submit"])) {
     }
 
     if ($ok != 0) {
-        $sql2 = 'UPDATE `category` SET cname="'.$_POST["name"].'",`desc`="'.$_POST['desc'].'" WHERE id='.$rowData["id"].'';
+        $name = test_input($_POST["name"]);
+        $desc = test_input($_POST['desc']);
+        $sql2 = 'UPDATE `category` SET cname="'.$name.'",`desc`="'.$desc.'" WHERE id='.$rowData["id"].'';
         if ($conn->query($sql2) === TRUE) {
             $conn->close();
             header("Location: category.php" );

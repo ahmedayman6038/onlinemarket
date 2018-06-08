@@ -2,7 +2,7 @@
 include("header.php");
 require("DatabaseConnection.php");
 $nameErr = $emailErr = $passwordErr = $cpasswordErr  = $userErr = "";
-
+$name = $email = $password = "";
 if(isset($_POST["submit"])) {
     $ok = 1;
   
@@ -25,15 +25,18 @@ if(isset($_POST["submit"])) {
 
     // Check if $ok is set to 0 by an error
     if ($ok != 0) {
-        $sql7 = "SELECT * FROM `user` WHERE email='".$_POST["email"]."' or password='".$_POST["password"]."'";
+        $name = test_input($_POST["name"]);
+        $email = test_input($_POST["email"]);
+        $password = test_input($_POST["password"]);
+        $sql7 = "SELECT * FROM `user` WHERE email='".$email."' or password='".$password."'";
         $result = $conn->query($sql7);
         if ($result->num_rows > 0) {
             $userErr = "User Email or Password Alerady Exist";
         }else{
             $sql = "INSERT INTO `user`(`name`, `email`, `password`,`telephone`, `type`) VALUES ('".
-            $_POST["name"]."','". $_POST["email"]."','". $_POST["password"]."','','user')";
+            $name."','". $email."','". $password."','','user')";
             if ($conn->query($sql) === TRUE) {
-                $sql5 = "SELECT * FROM `user` WHERE email='".$_POST["email"]."' and password='".$_POST["password"]."'";
+                $sql5 = "SELECT * FROM `user` WHERE email='".$email."' and password='".$password."'";
                 $result = $conn->query($sql5);
                 $rowData5;
                 if ($result->num_rows > 0) {

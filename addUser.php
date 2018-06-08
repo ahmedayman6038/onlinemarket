@@ -8,6 +8,7 @@ if(!isset($_SESSION["userId"])){
     header("Location: login.php");
   }
 $nameErr = $emailErr = $passwordErr = $telephoneErr  = $userErr = "";
+$name = $email = $password = $telephone = "";
 ?>
 <?php
    
@@ -36,13 +37,17 @@ if(isset($_POST["submit"])) {
 
     // Check if $ok is set to 0 by an error
     if ($ok != 0) {
-        $sql7 = "SELECT * FROM `user` WHERE email='".$_POST["email"]."' or password='".$_POST["password"]."'";
+        $name = test_input($_POST["name"]);
+        $email = test_input($_POST["email"]);
+        $password = test_input($_POST["password"]);
+        $telephone = test_input($_POST["telephone"]);
+        $sql7 = "SELECT * FROM `user` WHERE email='".$email."' or password='".$password."'";
         $result = $conn->query($sql7);
         if ($result->num_rows > 0) {
             $userErr = "User Email or Password Alerady Exist";
         }else{
             $sql = 'INSERT INTO `user`(`name`, `email`, `password`, `telephone`, `type`) VALUES ("'.
-            $_POST["name"].'","'. $_POST["email"].'","'. $_POST["password"].'","'. $_POST["telephone"].'","'. $_POST["type"].'")';
+            $name.'","'. $email.'","'. $password.'","'. $telephone.'","'. $_POST["type"].'")';
             if ($conn->query($sql) === TRUE) {
                 $conn->close();
                 header("Location: user.php" );

@@ -12,6 +12,7 @@ if ($result->num_rows > 0) {
     $rowData = $result->fetch_assoc(); 
 }
 $nameErr = $emailErr = $passwordErr = $telephoneErr = $userErr = "";
+$name = $email = $password = $telephone = "";
 ?>
 <?php
    
@@ -39,14 +40,18 @@ if(isset($_POST["submit"])) {
     }
     // Check if $ok is set to 0 by an error
     if ($ok != 0) {
-        $sql7 = 'SELECT * FROM `user` WHERE email="'.$_POST["email"].'" or password="'.$_POST["password"].'"';
+        $name = test_input($_POST["name"]);
+        $email = test_input($_POST["email"]);
+        $password = test_input($_POST["password"]);
+        $telephone = test_input($_POST["telephone"]);
+        $sql7 = 'SELECT * FROM `user` WHERE email="'.$email.'" or password="'.$password.'"';
         $result7 = $conn->query($sql7);
         if ($result7->num_rows > 1) {
             $userErr = "User Email or Password Alerady Exist";
         }else{
-            $_SESSION["userName"] = $_POST["name"];
-            $sql2 = 'UPDATE `user` SET `name`="'.$_POST["name"].'",`email`="'.$_POST["email"].
-            '",`password`="'.$_POST["password"].'",`telephone`="'.$_POST["telephone"].'" WHERE id='.$rowData["id"].'';
+            $_SESSION["userName"] = $name;
+            $sql2 = 'UPDATE `user` SET `name`="'.$name.'",`email`="'.$email.
+            '",`password`="'.$password.'",`telephone`="'.$telephone.'" WHERE id='.$rowData["id"].'';
             if ($conn->query($sql2) === TRUE) {
                 $conn->close();
                 header("Location: index.php" );
