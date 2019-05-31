@@ -10,7 +10,7 @@ ob_start();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
 	<link rel="stylesheet" href="styles/style.css">
-    <title>CMS</title>
+    <title>Online Store</title>
 </head>
 <body>
     <div class="header">
@@ -23,7 +23,7 @@ ob_start();
                     <span class="icon-bar"></span>
                 </button>
                    
-                    <a href="index.php" class="navbar-brand">CMS</a>
+                    <a href="index.php" class="navbar-brand">Online Store</a>
             </div>
             <div class="navbar-collapse collapse">
                <?php 

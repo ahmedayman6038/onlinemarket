@@ -60,7 +60,9 @@ if(isset($_POST["submit"])){
 </fieldset>
 </form>
 
-
+<script>
+  alert("Testing account to login:\nEmail: ahmedayman@gmail.com\nPassword: 0000");
+</script>
 
 
 <?php

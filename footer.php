@@ -1,6 +1,6 @@
 <hr />
         <footer>
-        <p>&copy; <?php echo date("Y")?> - CMS</p>
+        <p>&copy; <?php echo date("Y")?> - Online Store</p>
         </footer>
     </div>
 
