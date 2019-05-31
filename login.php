@@ -61,7 +61,7 @@ if(isset($_POST["submit"])){
 </form>
 
 <script>
-  alert("Testing account to login:\nEmail: ahmedayman@gmail.com\nPassword: 0000");
+  alert("Testing admin account to login:\nEmail: ahmedayman@gmail.com\nPassword: 0000");
 </script>
 
 
